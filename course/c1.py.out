@@ -1,0 +1,31 @@
+0 2023-11-07 12:25:02.452940 """
+1 2023-11-07 12:25:14.997839 Ćwiczenie:
+2 2023-11-07 12:25:47.729978 
+3 2023-11-07 12:25:47.729978 1. Wczytujemy adresy email z podanego pliku tekstowego emails.txt
+4 2023-11-07 12:25:47.729978 2. Pogrupować adresy email po domenach, jedncześnie pozbywając się duplikatów. Proponuję format:
+5 2023-11-07 12:25:47.729978 {
+6 2023-11-07 12:25:47.729978 'gmail.com': {'ala@gmail.com', 'ela@gmail.com'}
+7 2023-11-07 12:25:47.729978 ...
+8 2023-11-07 12:25:47.729978 }
+9 2023-11-07 12:25:47.729978 3. Zapisujemy adresy email do plików o nazwie pochodzącej od nazwy domeny,
+10 2023-11-07 12:25:47.729978    wg schematu:
+11 2023-11-07 12:25:47.729978    np wszystkie adresy @gmail.com mają zostać zapisane w pliku gmail.com.txt
+12 2023-11-07 12:25:47.729978 
+13 2023-11-07 12:25:47.729978 Podpowiedzi:
+14 2023-11-07 12:25:47.729978  - nazwę domeny można wyciąć z adresu znajdując znak @
+15 2023-11-07 12:25:47.729978 """
+16 2023-11-07 12:25:47.729978 import collections
+17 2023-11-07 12:25:47.729978 
+18 2023-11-07 12:25:47.729978 if __name__ == '__main__':
+19 2023-11-07 12:25:47.729978 
+20 2023-11-07 12:25:47.729978     d = collections.defaultdict(set)
+21 2023-11-07 12:25:47.729978     with open('emails.txt', 'rt', encoding='utf8') as f:
+22 2023-11-07 12:25:47.729978         for email in f.read().replace(',', ' ').split():
+23 2023-11-07 12:25:47.729978             if '@' in email:
+24 2023-11-07 12:25:47.730978                 domena = email.split('@')[1]
+25 2023-11-07 12:25:47.730978                 d[domena].add(email)
+26 2023-11-07 12:25:47.730978     print(d)
+27 2023-11-07 12:25:47.730978     for domena, zbior_maili in d.items():
+28 2023-11-07 12:25:47.730978         with open(f'{domena}.txt', 'wt', encoding='utf8') as f:
+29 2023-11-07 12:25:47.730978             for email in zbior_maili:
+30 2023-11-07 12:25:47.730978                 f.write(f'{email}\n')

@@ -1,0 +1,6 @@
+/venv
+**.pdf
+**.zip
+**.txt
+**.log
+**/.idea
